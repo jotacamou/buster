@@ -1,0 +1,26 @@
+version: "3"
+services:
+  buster-app-golang:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8081"
+    environment:
+      BUSTER_API_URL: https://buster.app
+    depends_on:
+      - buster-app-mysql
+  buster-app-mysql:
+    image: "mysql:5.7"
+    command: "--character-set-server='utf8mb4' --collation-server='utf8mb4_unicode_ci'"
+    ports:
+      - '43308:3306'
+    logging:
+      driver: none
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: dev
+      MYSQL_PASSWORD: password123
+      MYSQL_DATABASE: buster_dev
+    volumes:
+      - ../migrations/seeds:/docker-entrypoint-initdb.d

@@ -1,0 +1,17 @@
+{
+  "dev": {
+    "host": "buster-app-mysql",
+    "driver": "mysql",
+    "port": 3306,
+    "user": "dev",
+    "password": "password123",
+    "database": "buster_dev"
+  },
+  "production": {
+    "host": { "ENV": "DB_HOST" },
+    "driver": "mysql",
+    "user": { "ENV": "DB_USER" },
+    "password": { "ENV": "DB_PASSWORD" },
+    "database": { "ENV": "DB_NAME" }
+  }
+}
